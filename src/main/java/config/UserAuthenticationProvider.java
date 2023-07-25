@@ -10,6 +10,7 @@ import dto.UserDto;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ import java.util.Date;
 
 
 @RequiredArgsConstructor
-@Component
+@ComponentScan
 public class UserAuthenticationProvider {
 
     @Value("${security.jwt.token.secret-key:secret-key}")
