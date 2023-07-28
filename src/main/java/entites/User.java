@@ -15,11 +15,12 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "app_user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name",nullable = false)
+    @Column(name = "first_name", nullable = false)
     @Size(max = 100)
     private String firstName;
 
@@ -31,7 +32,7 @@ public class User {
     @Size(max = 100)
     private String login;
 
-    @Column(nullable = false)
+
     @Size(max = 100)
     private String password;
 }

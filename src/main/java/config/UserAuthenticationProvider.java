@@ -24,8 +24,7 @@ import java.util.Date;
 
 @RequiredArgsConstructor
 @Component
-
-public class UserAuthenticationProvider implements AuthenticationProvider {
+public class UserAuthenticationProvider {
 
     @Value("${security.jwt.token.secret-key:secret-key}")
     private String secretKey;
@@ -63,13 +62,4 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
 
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        return null;
-    }
-
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return false;
-    }
 }

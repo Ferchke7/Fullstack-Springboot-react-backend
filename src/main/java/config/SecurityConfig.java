@@ -22,12 +22,11 @@ public class SecurityConfig {
     private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     private final UserAuthenticationProvider userAuthenticationProvider;
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        System.out.println(userAuthenticationEntryPoint);
-        http.exceptionHandling((exceptionalHandling) -> exceptionalHandling.accessDeniedPage("/errors/access-denied"))
-                .authenticationProvider((AuthenticationProvider) userAuthenticationEntryPoint)
+        http.exceptionHandling((exceptionalHandling) -> exceptionalHandling.authenticationEntryPoint(userAuthenticationEntryPoint))
                 .addFilterBefore(new JwtAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement((sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -38,5 +37,4 @@ public class SecurityConfig {
         ;
         return http.build();
     }
-
 }

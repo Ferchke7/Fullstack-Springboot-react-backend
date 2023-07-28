@@ -2,14 +2,16 @@ package exception;
 
 import org.springframework.http.HttpStatus;
 
-public class AppException extends RuntimeException{
-    private final HttpStatus code;
-    public AppException(String message, HttpStatus code) {
+public class AppException extends RuntimeException {
+
+    private final HttpStatus status;
+
+    public AppException(String message, HttpStatus status) {
         super(message);
-        this.code = code;
+        this.status = status;
     }
 
-    public HttpStatus getCode() {
-        return code;
+    public HttpStatus getStatus() {
+        return status;
     }
 }
