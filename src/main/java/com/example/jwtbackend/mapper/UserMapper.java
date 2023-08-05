@@ -1,11 +1,14 @@
-package mapper;
+package com.example.jwtbackend.mapper;
 
-import dto.SignUpDto;
-import dto.UserDto;
-import entites.User;
+
+import com.example.jwtbackend.dto.SignUpDto;
+import com.example.jwtbackend.dto.UserDto;
+import com.example.jwtbackend.entites.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.stereotype.Component;
 
+@Component
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 

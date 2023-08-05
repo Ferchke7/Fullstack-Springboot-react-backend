@@ -1,4 +1,4 @@
-package dto;
+package com.example.jwtbackend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

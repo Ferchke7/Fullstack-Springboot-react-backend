@@ -1,4 +1,4 @@
-package config;
+package com.example.jwtbackend.config;
 
 
 import com.auth0.jwt.JWT;
@@ -6,14 +6,14 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
-import dto.UserDto;
+import com.example.jwtbackend.dto.UserDto;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import service.UserService;
+import com.example.jwtbackend.service.UserService;
 
 import java.util.Base64;
 import java.util.Collections;

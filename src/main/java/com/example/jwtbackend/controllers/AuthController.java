@@ -1,19 +1,14 @@
-package controllers;
+package com.example.jwtbackend.controllers;
 
 //import config.UserAuthenticationProvider;
-import config.UserAuthenticationProvider;
-import dto.CredentialsDto;
-import dto.SignUpDto;
-import dto.UserDto;
-import jakarta.annotation.Resource;
+import com.example.jwtbackend.config.UserAuthenticationProvider;
+import com.example.jwtbackend.dto.CredentialsDto;
+import com.example.jwtbackend.dto.SignUpDto;
+import com.example.jwtbackend.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import service.UserService;
+import org.springframework.web.bind.annotation.*;
+import com.example.jwtbackend.service.UserService;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -34,10 +29,17 @@ public class AuthController {
         return ResponseEntity.ok(userDto);
     }
 
+    @PostMapping("/test")
+    public ResponseEntity<CredentialsDto> test(@RequestBody @Valid CredentialsDto credentialsDto) {
+        System.out.println("created : " + credentialsDto.getLogin() + " " + credentialsDto.getPassword());
+        return ResponseEntity.ok(credentialsDto);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody SignUpDto user) {
         UserDto createdUser = userService.register(user);
         createdUser.setToken(userAuthenticationProvider.createToken(user.getLogin()));
+        System.out.println("Tokens for: " + user.getLogin() + " " + user.getLastName());
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
     }
 

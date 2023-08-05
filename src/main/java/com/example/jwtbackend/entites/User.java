@@ -1,4 +1,4 @@
-package entites;
+package com.example.jwtbackend.entites;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class User {
     @Size(max = 100)
     private String login;
 
-
+    @Column(nullable = false)
     @Size(max = 100)
     private String password;
 }

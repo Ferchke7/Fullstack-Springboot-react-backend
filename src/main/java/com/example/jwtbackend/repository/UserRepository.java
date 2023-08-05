@@ -1,7 +1,7 @@
-package repository;
+package com.example.jwtbackend.repository;
 
 
-import entites.User;
+import com.example.jwtbackend.entites.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,7 +1,7 @@
-package config;
+package com.example.jwtbackend.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dto.ErrorDto;
+import com.example.jwtbackend.dto.ErrorDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,6 +12,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+
 
 
 @Component

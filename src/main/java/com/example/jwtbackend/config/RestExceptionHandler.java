@@ -1,7 +1,7 @@
-package config;
+package com.example.jwtbackend.config;
 
-import dto.ErrorDto;
-import exception.AppException;
+import com.example.jwtbackend.dto.ErrorDto;
+import com.example.jwtbackend.exception.AppException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
