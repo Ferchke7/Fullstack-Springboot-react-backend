@@ -13,6 +13,7 @@ import java.util.List;
 public class Controller {
     @GetMapping("/messages")
     public ResponseEntity<List<String>> messages() {
+
         return ResponseEntity.ok(Arrays.asList("first", "second"));
     }
 }

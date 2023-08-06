@@ -26,21 +26,16 @@ public class AuthController {
     public ResponseEntity<UserDto> login(@RequestBody @Valid CredentialsDto credentialsDto) {
         UserDto userDto = userService.login(credentialsDto);
         userDto.setToken(userAuthenticationProvider.createToken(userDto.getLogin()));
-        System.out.println("Entered as : " + credentialsDto.getLogin());
+        System.out.println("Entered as for DTO: " + userDto.getLogin() + " as credentials: " + credentialsDto.getLogin());
         return ResponseEntity.ok(userDto);
     }
 
-    @PostMapping("/test")
-    public ResponseEntity<CredentialsDto> test(@RequestBody @Valid CredentialsDto credentialsDto) {
-        System.out.println("created : " + credentialsDto.getLogin() + " " + credentialsDto.getPassword());
-        return ResponseEntity.ok(credentialsDto);
-    }
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody SignUpDto user) {
         UserDto createdUser = userService.register(user);
         createdUser.setToken(userAuthenticationProvider.createToken(user.getLogin()));
-        System.out.println("Tokens for: " + user.getLogin() + " " + user.getLastName());
+        System.out.println("USER for: " + user.getLogin() + " " + " for token: " + createdUser.getLogin());
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
     }
 
