@@ -26,6 +26,7 @@ public class AuthController {
     public ResponseEntity<UserDto> login(@RequestBody @Valid CredentialsDto credentialsDto) {
         UserDto userDto = userService.login(credentialsDto);
         userDto.setToken(userAuthenticationProvider.createToken(userDto.getLogin()));
+        System.out.println("Entered as : " + credentialsDto.getLogin());
         return ResponseEntity.ok(userDto);
     }
 
