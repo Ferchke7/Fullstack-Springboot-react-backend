@@ -2,12 +2,14 @@ package com.example.jwtbackend.entites;
 
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
 public class Product {
-//    String name;
-//    Long price;
-//
-//    @ManyToMany()
-//    @JoinColumn
-//    Blob image;
+    String name;
+    Double price;
+
+
 }
