@@ -19,7 +19,7 @@ public class Controller {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<String> returnProducts() {
+    public ResponseEntity<List<Product>> returnProducts() {
         List<Product> products = new ArrayList<>();
 
         products.add(new Product("Product 1", 10.99));
@@ -33,6 +33,6 @@ public class Controller {
         products.add(new Product("Product 9", 16.50));
         products.add(new Product("Product 10", 22.99));
         System.out.println(products.toString());
-        return ResponseEntity.ok(products.get(3).getName());
+        return ResponseEntity.ok(products);
     }
 }

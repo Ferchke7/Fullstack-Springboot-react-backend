@@ -23,7 +23,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Component
 public class UserAuthenticationProvider {
-
+    //TODO change for hashing SHA256
     @Value("${security.jwt.token.secret-key:secret-key}")
     private String secretKey;
 
