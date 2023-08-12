@@ -3,6 +3,7 @@ package com.example.jwtbackend.controllers;
 import com.example.jwtbackend.entites.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 
 public class Controller {
+    List<Product> products = new ArrayList<>();
     @GetMapping("/messages")
     public ResponseEntity<List<String>> messages() {
 
@@ -20,7 +22,7 @@ public class Controller {
 
     @GetMapping("/products")
     public ResponseEntity<List<Product>> returnProducts() {
-        List<Product> products = new ArrayList<>();
+
 
         products.add(new Product("Product 1", 10.99));
         products.add(new Product("Product 2", 25.49));
@@ -34,5 +36,18 @@ public class Controller {
         products.add(new Product("Product 10", 22.99));
         System.out.println(products.toString());
         return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/products/{id}")
+    public ResponseEntity<Product> productsByName(@PathVariable String id){
+        String tempProduct = "Product " + id;
+
+        for (Product product : products) {
+            if (product.getName().equals(tempProduct)) {
+                System.out.println(product);
+                return ResponseEntity.ok(product);
+            }
+        }
+        return ResponseEntity.notFound().build();
     }
 }
