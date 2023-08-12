@@ -13,41 +13,43 @@ import java.util.List;
 @RestController
 
 public class Controller {
-    List<Product> products = new ArrayList<>();
+
     @GetMapping("/messages")
     public ResponseEntity<List<String>> messages() {
 
         return ResponseEntity.ok(Arrays.asList("first", "second"));
     }
 
-    @GetMapping("/products")
-    public ResponseEntity<List<Product>> returnProducts() {
+    //TODO create new endpoint
 
-
-        products.add(new Product("Product 1", 10.99));
-        products.add(new Product("Product 2", 25.49));
-        products.add(new Product("Product 3", 5.99));
-        products.add(new Product("Product 4", 14.75));
-        products.add(new Product("Product 5", 8.99));
-        products.add(new Product("Product 6", 19.99));
-        products.add(new Product("Product 7", 12.00));
-        products.add(new Product("Product 8", 7.25));
-        products.add(new Product("Product 9", 16.50));
-        products.add(new Product("Product 10", 22.99));
-        System.out.println(products.toString());
-        return ResponseEntity.ok(products);
-    }
-
-    @GetMapping("/products/{id}")
-    public ResponseEntity<Product> productsByName(@PathVariable String id){
-        String tempProduct = "Product " + id;
-
-        for (Product product : products) {
-            if (product.getName().equals(tempProduct)) {
-                System.out.println(product);
-                return ResponseEntity.ok(product);
-            }
-        }
-        return ResponseEntity.notFound().build();
-    }
+//    @GetMapping("/products")
+//    public ResponseEntity<List<Product>> returnProducts() {
+//
+//
+//        products.add(new Product("Product 1", 10.99));
+//        products.add(new Product("Product 2", 25.49));
+//        products.add(new Product("Product 3", 5.99));
+//        products.add(new Product("Product 4", 14.75));
+//        products.add(new Product("Product 5", 8.99));
+//        products.add(new Product("Product 6", 19.99));
+//        products.add(new Product("Product 7", 12.00));
+//        products.add(new Product("Product 8", 7.25));
+//        products.add(new Product("Product 9", 16.50));
+//        products.add(new Product("Product 10", 22.99));
+//        System.out.println(products.toString());
+//        return ResponseEntity.ok(products);
+//    }
+//
+//    @GetMapping("/products/{id}")
+//    public ResponseEntity<Product> productsByName(@PathVariable String id){
+//        String tempProduct = "Product " + id;
+//
+//        for (Product product : products) {
+//            if (product.getName().equals(tempProduct)) {
+//                System.out.println(product);
+//                return ResponseEntity.ok(product);
+//            }
+//        }
+//        return ResponseEntity.notFound().build();
+//    }
 }
