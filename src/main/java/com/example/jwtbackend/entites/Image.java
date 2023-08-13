@@ -9,16 +9,13 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Blob;
 
-//
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Builder
-//@Data
-//@Table(name = "coffeePicture")
-//public class Image {
-//    private String name;
-//    private Long price;
-//
-//    @Lob
-//    private Blob coffeePicture;
-//}
+
+
+@Table(name = "images_table")
+public class Image {
+    private String name;
+    private Long price;
+
+    @Lob
+    private Blob coffeePicture;
+}
