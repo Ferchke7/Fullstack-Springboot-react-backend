@@ -1,8 +1,10 @@
 package com.example.jwtbackend.controllers;
 
+import com.cloudinary.Cloudinary;
 import com.example.jwtbackend.entites.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,8 @@ public class Controller {
 
         return ResponseEntity.ok(Arrays.asList("first", "second"));
     }
+
+
 
     //TODO create new endpoint
 
