@@ -26,9 +26,9 @@ public class User {
     @Size(max = 100)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "email", nullable = false)
     @Size(max = 100)
-    private String lastName;
+    private String email;
 
     @Column(nullable = false)
     @Size(max = 100)
@@ -38,7 +38,7 @@ public class User {
     @Size(max = 100)
     private String password;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<Cart> carts = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Product> products = new HashSet<>();
 
 }

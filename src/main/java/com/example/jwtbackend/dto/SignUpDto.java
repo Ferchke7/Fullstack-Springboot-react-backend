@@ -17,7 +17,7 @@ public class SignUpDto {
     private String firstName;
 
     @NotEmpty
-    private String lastName;
+    private String email;
 
     //TODO make it email or add email instance
     @NotEmpty

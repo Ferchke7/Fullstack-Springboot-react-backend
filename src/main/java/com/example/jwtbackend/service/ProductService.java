@@ -38,6 +38,10 @@ public class ProductService {
     public List<String> getAllImages(){
         return productRepository.getAllByImageUrl();
     }
+
+    public List<Product> getAllProducts(){
+        return productRepository.getAllProducts();
+    }
     public void saveProduct(Product product) {
         productRepository.save(product);
     }

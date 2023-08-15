@@ -15,4 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p.imageUrl FROM Product p")
     List<String> getAllByImageUrl();
 
+    @Query("SELECT p FROM Product p")
+    List<Product> getAllProducts();
 }

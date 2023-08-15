@@ -40,8 +40,9 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Product created successfully");
     }
 
-    @GetMapping("/get/images")
-    public List<String> getAllPictures() {
-        return productService.getAllImages();
+
+        @GetMapping("/products")
+        public ResponseEntity<List<Product>> returnProducts() {
+        return ResponseEntity.ok(productService.getAllProducts());
     }
 }

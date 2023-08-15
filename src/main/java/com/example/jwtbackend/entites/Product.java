@@ -21,4 +21,8 @@ public class Product {
     private String name;
     private Double price;
     private String imageUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
