@@ -38,7 +38,9 @@ public class ProductService {
     public List<String> getAllImages(){
         return productRepository.getAllByImageUrl();
     }
-
+    public void deleteById(Long id) {
+        productRepository.deleteById(id);
+    }
     public List<Product> getAllProducts(){
         return productRepository.getAllProducts();
     }
