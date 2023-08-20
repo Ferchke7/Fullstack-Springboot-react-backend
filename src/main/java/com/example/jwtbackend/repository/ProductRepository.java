@@ -1,6 +1,7 @@
 package com.example.jwtbackend.repository;
 
 import com.example.jwtbackend.entites.Product;
+import com.example.jwtbackend.entites.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,5 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p")
     List<Product> getAllProducts();
 
+    List<Product> getAllByUser(User user);
+    List<Product> getByUserId(Long id);
 
 }

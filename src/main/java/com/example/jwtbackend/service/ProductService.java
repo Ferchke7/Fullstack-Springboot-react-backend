@@ -3,6 +3,7 @@ package com.example.jwtbackend.service;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.example.jwtbackend.entites.Product;
+import com.example.jwtbackend.entites.User;
 import com.example.jwtbackend.repository.ProductRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 import lombok.RequiredArgsConstructor;
@@ -46,5 +47,9 @@ public class ProductService {
     }
     public void saveProduct(Product product) {
         productRepository.save(product);
+    }
+
+    public List<Product> getProductsByUser(Long id) {
+        return productRepository.getByUserId(id);
     }
 }

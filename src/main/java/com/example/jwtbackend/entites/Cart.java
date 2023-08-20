@@ -3,7 +3,7 @@ package com.example.jwtbackend.entites;
 import jakarta.persistence.*;
 
 import java.util.Set;
-
+//TODO CREATE A CART
 //@Entity
 //@Table(name = "carts")
 //public class Cart {

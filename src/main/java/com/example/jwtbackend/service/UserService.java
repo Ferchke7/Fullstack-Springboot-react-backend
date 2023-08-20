@@ -4,9 +4,12 @@ import com.example.jwtbackend.dto.CredentialsDto;
 import com.example.jwtbackend.dto.SignUpDto;
 import com.example.jwtbackend.dto.UserDto;
 
+import com.example.jwtbackend.entites.Product;
+import com.example.jwtbackend.entites.Role;
 import com.example.jwtbackend.entites.User;
 import com.example.jwtbackend.exception.AppException;
 import com.example.jwtbackend.mapper.UserMapper;
+import com.example.jwtbackend.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.example.jwtbackend.repository.UserRepository;
 
 import java.nio.CharBuffer;
+import java.util.Collections;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -25,7 +29,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
-
+    private final RoleRepository roleRepository;
     private final UserMapper userMapper;
 
     public UserDto login(CredentialsDto credentialsDto) {
@@ -49,7 +53,9 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword())));
 
         User savedUser = userRepository.save(user);
-
+        //{TODO} change it to role based
+//        Role defaultRole = roleRepository.findByName("ROLE_USER");
+//        user.setRoles(Collections.singleton(defaultRole));
         return userMapper.toUserDto(savedUser);
     }
 
@@ -58,5 +64,12 @@ public class UserService {
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
         return userMapper.toUserDto(user);
     }
+    public User getUserByLogin(String login) {
+        User user = userRepository.findByLogin(login)
+                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+        return user;
+    }
+
+
 
 }
