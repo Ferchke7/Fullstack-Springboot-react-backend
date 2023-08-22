@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +29,7 @@ public class User {
 
     @Column(name = "email", nullable = false)
     @Size(max = 100)
+    @Email(regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
     private String email;
 
     @Column(nullable = false)
