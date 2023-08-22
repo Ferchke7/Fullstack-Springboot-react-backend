@@ -59,9 +59,6 @@ public class ProductController {
             return ResponseEntity.ok(productService.getProductsByUser(id));
         }
 
-//        @DeleteMapping("/myproduct/{id}")
-//        public ResponseEntity<Product> deleteProduct(@PathVariable Long id) {
-//
-//        }
+
 
 }
