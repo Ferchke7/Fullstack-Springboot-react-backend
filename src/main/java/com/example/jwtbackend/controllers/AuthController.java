@@ -32,9 +32,10 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody SignUpDto user) {
+    public ResponseEntity<UserDto> register(@Valid @RequestBody SignUpDto user) {
         UserDto createdUser = userService.register(user);
         createdUser.setToken(userAuthenticationProvider.createToken(user.getLogin()));
+        //TODO validate user's login if there is same or not
         System.out.println("USER for: " + user.getLogin() + " " + " for token: " + createdUser.getLogin());
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
     }

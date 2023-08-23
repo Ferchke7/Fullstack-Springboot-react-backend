@@ -44,11 +44,14 @@ public class UserService {
 
     public UserDto register(SignUpDto userDto) {
         Optional<User> optionalUser = userRepository.findByLogin(userDto.getLogin());
+        Optional<User> optionalUserEmail = userRepository.findByEmail(userDto.getEmail());
 
         if (optionalUser.isPresent()) {
             throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
         }
-
+        if (optionalUserEmail.isPresent()) {
+            throw new AppException("Email already has been taken", HttpStatus.BAD_REQUEST);
+        }
         User user = userMapper.signUpToUser(userDto);
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword())));
 
