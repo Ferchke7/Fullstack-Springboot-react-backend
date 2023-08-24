@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
-                        .requestMatchers("/products","create","/myproducts/**").permitAll()
+                        .requestMatchers("/products**","/products/**","/create","/myproducts/**").permitAll()
                         .requestMatchers("/create").hasAnyRole("ADMIN","SELLER")
                         .anyRequest().authenticated());
         return http.build();

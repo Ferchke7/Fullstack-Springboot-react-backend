@@ -4,12 +4,17 @@ import com.example.jwtbackend.entites.Product;
 import com.example.jwtbackend.entites.User;
 import com.example.jwtbackend.service.ProductService;
 import com.example.jwtbackend.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+
 
 @RestController
 public class ProductController {
@@ -35,6 +40,7 @@ public class ProductController {
         product.setName(productRequest.getName());
         product.setPrice(productRequest.getPrice());
         product.setUser(authenticatedUser);
+        product.setCreatedDate(new Date());
         // Handle the image upload and set the image URL
         if (file != null && !file.isEmpty()) {
             String imageUrl = productService.uploadImage(file);
@@ -47,11 +53,24 @@ public class ProductController {
     }
 
 
-        @GetMapping("/products")
-        public ResponseEntity<List<Product>> returnProducts() {
-            System.out.println(productService.getAllProducts());
-        return ResponseEntity.ok(productService.getAllProducts());
+    @GetMapping("/products")
+    public ResponseEntity<Page<Product>> returnProducts(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int pageSize
+    ) {
+        Pageable pageable = PageRequest.of(page - 1, pageSize); // Adjust page to 0-based index
+        Page<Product> paginatedProducts = productService.getAllProducts(pageable);
+
+        return ResponseEntity.ok(paginatedProducts);
     }
+
+    @GetMapping("/products/count")
+    public ResponseEntity<Long> getProductCount() {
+        long totalCount = productService.getTotalProductCount();
+        System.out.println(totalCount);
+        return ResponseEntity.ok(totalCount);
+    }
+
 
         @GetMapping("/myproducts/{id}")
         public ResponseEntity<List<Product>> returnUserProducts(@PathVariable Long id) {

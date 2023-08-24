@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import java.sql.Blob;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -21,8 +22,12 @@ public class Product {
     private String name;
     private Double price;
     private String imageUrl;
+    @Temporal(TemporalType.DATE)
+    private Date createdDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
+
+
 }
