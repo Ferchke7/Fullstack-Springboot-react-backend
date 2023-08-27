@@ -31,26 +31,25 @@ public class ProductController {
     public ResponseEntity<String> createProduct(
             @RequestParam("file") MultipartFile file,
             @ModelAttribute Product productRequest,
-            @RequestParam String authenticatedUserLogin) throws IOException  {
+            @RequestParam String authenticatedUserLogin)
+            throws IOException  {
         System.out.println(authenticatedUserLogin);
-        User authenticatedUser = userService.getUserByLogin(authenticatedUserLogin);
-
-        // Create a Product entity from the request data
+        User authenticatedUser = userService
+                .getUserByLogin(authenticatedUserLogin);
         Product product = new Product();
         product.setName(productRequest.getName());
         product.setPrice(productRequest.getPrice());
         product.setUser(authenticatedUser);
         product.setCreatedDate(new Date());
-        // Handle the image upload and set the image URL
         if (file != null && !file.isEmpty()) {
             String imageUrl = productService.uploadImage(file);
             product.setImageUrl(imageUrl);
         }
-
         productService.saveProduct(product);
         System.out.println(product.getName() + " is : " + product.getPrice() + " by " + authenticatedUser.getProducts().size());
         return ResponseEntity.status(HttpStatus.CREATED).body("Product created successfully");
     }
+
 
 
     @GetMapping("/products")
@@ -58,7 +57,7 @@ public class ProductController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int pageSize
     ) {
-        Pageable pageable = PageRequest.of(page - 1, pageSize); // Adjust page to 0-based index
+        Pageable pageable = PageRequest.of(page - 1, pageSize);
         Page<Product> paginatedProducts = productService.getAllProducts(pageable);
 
         return ResponseEntity.ok(paginatedProducts);
@@ -72,12 +71,17 @@ public class ProductController {
     }
 
 
-        @GetMapping("/myproducts/{id}")
-        public ResponseEntity<List<Product>> returnUserProducts(@PathVariable Long id) {
-            System.out.println(productService.getProductsByUser(id));
-            return ResponseEntity.ok(productService.getProductsByUser(id));
-        }
-
+    @GetMapping("/myproducts/{id}")
+    public ResponseEntity<List<Product>> returnUserProducts(@PathVariable Long id) {
+       System.out.println(productService.getProductsByUser(id));
+       return ResponseEntity.ok(productService.getProductsByUser(id));
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteProduct(@PathVariable Long id) {
+        System.out.println(productService.deleteProductById(id));
+        System.out.println("deleted Product id of " + id);
+        return ResponseEntity.ok("deleted Product id of " + id);
+    }
 
 
 }

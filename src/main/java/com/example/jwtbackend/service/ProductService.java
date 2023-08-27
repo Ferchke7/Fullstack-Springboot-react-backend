@@ -22,7 +22,7 @@ public class ProductService {
 
 
     private final ProductRepository productRepository;
-
+    private final CloudinaryService cloudinaryService;
 
     public String uploadImage(MultipartFile file) throws IOException {
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
@@ -38,12 +38,16 @@ public class ProductService {
 
         return uploadResult.get("secure_url").toString();
     }
+    public String deleteImage(String imageUrl) {
+        if (cloudinaryService.deleteImage(imageUrl)) {
+            return "Image deleted " + imageUrl;
+        }
+        return "No image like that";
+    }
     public List<String> getAllImages(){
         return productRepository.getAllByImageUrl();
     }
-    public void deleteById(Long id) {
-        productRepository.deleteById(id);
-    }
+
 
     public Page<Product> getAllProducts(Pageable pageable) {
         return productRepository.findAll(pageable);
@@ -55,7 +59,14 @@ public class ProductService {
     public List<Product> getProductsByUser(Long id) {
         return productRepository.getByUserId(id);
     }
+    public String deleteProductById(Long id) {
+        String getProductLink = productRepository.getById(id).getImageUrl();
+        System.out.println(getProductLink);
+        productRepository.deleteById(id);
+        return deleteImage(getProductLink);
+    }
     public long getTotalProductCount() {
+
         return productRepository.count();
     }
 }
