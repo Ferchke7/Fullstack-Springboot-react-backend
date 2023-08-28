@@ -70,7 +70,6 @@ public class ProductController {
         return ResponseEntity.ok(totalCount);
     }
 
-
     @GetMapping("/myproducts/{id}")
     public ResponseEntity<List<Product>> returnUserProducts(@PathVariable Long id) {
        System.out.println(productService.getProductsByUser(id));
