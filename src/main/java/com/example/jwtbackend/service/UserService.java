@@ -53,6 +53,7 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
         //{TODO} change it to role based
+
 //        Role defaultRole = roleRepository.findByName("ROLE_USER");
 //        user.setRoles(Collections.singleton(defaultRole));
         return userMapper.toUserDto(savedUser);
