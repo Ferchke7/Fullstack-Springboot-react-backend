@@ -12,6 +12,8 @@ import com.example.jwtbackend.service.UserService;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.security.Principal;
+import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -31,8 +33,11 @@ public class AuthController {
     }
 
 
+
+
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@Valid @RequestBody SignUpDto user) {
+
         UserDto createdUser = userService.register(user);
         createdUser.setToken(userAuthenticationProvider.createToken(user.getLogin()));
         //TODO validate user's login if there is same or not

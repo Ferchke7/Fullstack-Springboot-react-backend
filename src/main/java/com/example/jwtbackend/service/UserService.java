@@ -4,8 +4,6 @@ import com.example.jwtbackend.dto.CredentialsDto;
 import com.example.jwtbackend.dto.SignUpDto;
 import com.example.jwtbackend.dto.UserDto;
 
-import com.example.jwtbackend.entites.Product;
-import com.example.jwtbackend.entites.Role;
 import com.example.jwtbackend.entites.User;
 import com.example.jwtbackend.exception.AppException;
 import com.example.jwtbackend.mapper.UserMapper;
@@ -13,12 +11,10 @@ import com.example.jwtbackend.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import com.example.jwtbackend.repository.UserRepository;
 
 import java.nio.CharBuffer;
-import java.util.Collections;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -61,7 +57,10 @@ public class UserService {
 //        user.setRoles(Collections.singleton(defaultRole));
         return userMapper.toUserDto(savedUser);
     }
-
+    public User saveUser(User user) {
+        userRepository.save(user);
+        return user;
+    }
     public UserDto findByLogin(String login) {
         User user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
@@ -74,5 +73,7 @@ public class UserService {
     }
 
 
-
+    public Optional<User> getUserByUsername(String username) {
+        return userRepository.getByFirstName(username);
+    }
 }

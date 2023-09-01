@@ -1,5 +1,6 @@
 package com.example.jwtbackend;
 
+import com.example.jwtbackend.entites.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
