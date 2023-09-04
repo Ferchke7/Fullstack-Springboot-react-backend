@@ -1,6 +1,5 @@
 package com.example.jwtbackend.entites;
 
-import com.example.jwtbackend.oauth2.OAuth2Provider;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,17 +40,7 @@ public class User {
     @Size(max = 100)
     private String password;
 
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(name = "USER_ROLES",
-//            joinColumns = {
-//                    @JoinColumn(name = "USER_ID")
-//            },
-//            inverseJoinColumns = {
-//                    @JoinColumn(name = "ROLE_ID") })
-//    private Set<Role> roles;
-    @Enumerated(EnumType.STRING)
-    private OAuth2Provider provider;
-    private String role;
+    private String role = "USER";
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Product> products = new HashSet<>();
 

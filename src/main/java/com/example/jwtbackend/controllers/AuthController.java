@@ -5,15 +5,16 @@ import com.example.jwtbackend.config.UserAuthenticationProvider;
 import com.example.jwtbackend.dto.CredentialsDto;
 import com.example.jwtbackend.dto.SignUpDto;
 import com.example.jwtbackend.dto.UserDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import com.example.jwtbackend.service.UserService;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.security.Principal;
-import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -33,14 +34,10 @@ public class AuthController {
     }
 
 
-
-
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@Valid @RequestBody SignUpDto user) {
-
         UserDto createdUser = userService.register(user);
         createdUser.setToken(userAuthenticationProvider.createToken(user.getLogin()));
-        //TODO validate user's login if there is same or not
         System.out.println("USER for: " + user.getLogin() + " " + " for token: " + createdUser.getLogin());
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
     }

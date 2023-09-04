@@ -19,11 +19,12 @@ public class SignUpDto {
     @NotEmpty
     private String email;
 
-    //TODO make it email or add email instance
+
     @NotEmpty
     private String login;
 
     @NotEmpty
     private char[] password;
+
 
 }
