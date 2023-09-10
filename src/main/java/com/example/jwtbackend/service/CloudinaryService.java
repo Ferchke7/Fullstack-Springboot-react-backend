@@ -17,7 +17,7 @@ public class CloudinaryService {
     }
     public boolean deleteImage(String imageLink) {
         String pathWithoutProtocolAndDomain = imageLink.replaceFirst("^(http(s)?://)?[^/]+/", "");
-        String publicId = imageLink.replaceAll("\\.(jpg|png|gif|jpeg)$", "");
+        String publicId = pathWithoutProtocolAndDomain.replaceAll("\\.(jpg|png|gif|jpeg)$", "");
         System.out.println(publicId);
         try {
             cloudinary.uploader().destroy(publicId, ObjectUtils.asMap("resource_type","image"));
