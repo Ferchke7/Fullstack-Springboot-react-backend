@@ -40,8 +40,14 @@ public class User {
     @Size(max = 100)
     private String password;
 
-    private String role = "USER";
+    @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Set<Roles> roles;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Product> products = new HashSet<>();
-
+    void addRoles(Roles roles) {
+        this.roles.add(roles);
+    }
 }
